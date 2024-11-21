@@ -1,10 +1,16 @@
 <script>
+import AppHeader from './components/AppHeader.vue';
+import AppMain from './components/AppMain.vue';
+import AppFooter from './components/AppFooter.vue';
+
  export default {
     data(){
 
     },
     components:{
-
+        AppHeader,
+        AppMain,
+        AppFooter    
     },
     methods: {
 
@@ -13,28 +19,13 @@
 </script>
 
 <template>
-    <header>
-      header
-    </header>
+    <AppHeader />
+    <AppMain />
+    <AppFooter />
 
-    <main>
-      main
-    </main>
-
-    <footer>
-      footer
-    </footer>
 
 </template>
 
 <style scoped>
-  header{
-    color: red;
-  }
-  main{
-    color: green;
-  }
-  footer{
-    color: blue;
-  }
+
 </style>
