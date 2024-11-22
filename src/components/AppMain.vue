@@ -152,7 +152,9 @@ import axios from 'axios';
     cursor: pointer;
     font-size: 1.4em;
     width: 100%;
-
   }
-
+  .buttons > button:disabled{
+    opacity: .5;
+    background-color: lightgrey;
+  }
 </style>
