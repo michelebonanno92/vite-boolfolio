@@ -7,6 +7,7 @@ import axios from 'axios';
           projects: [],
           prevPage: null,
           nextPage: null,
+          clickedButton: false
 
         };
     },
@@ -30,6 +31,7 @@ import axios from 'axios';
           });
       },
       getPrevPage() {
+        this.clickedButton = true;
         axios
           .get(this.prevPage)
           .then((res) => {
@@ -42,9 +44,13 @@ import axios from 'axios';
             console.log(this.prevPage);
             this.nextPage = res.data.projects.next_page_url;
             console.log(this.nextPage);
+
+            this.clickedButton = false;
+
           });
       },
       getNextPage() {
+        this.clickedButton = true;
         axios
           .get(this.nextPage)
           .then((res) => {
@@ -57,6 +63,9 @@ import axios from 'axios';
             console.log(this.prevPage);
             this.nextPage = res.data.projects.next_page_url;
             console.log(this.nextPage);
+
+            this.clickedButton = false;
+
           });
       }
     }
@@ -96,12 +105,13 @@ import axios from 'axios';
                 </div>
           </div>
       </div>
+      
       <div class="buttons">
-          <button @click="getPrevPage()" :disabled="prevPage == null">
+          <button @click="getPrevPage()" :disabled="prevPage == null || clickedButton">
             &lt; Precedente 
           </button>
 
-          <button @click="getNextPage()" :disabled="nextPage == null">
+          <button @click="getNextPage()" :disabled="nextPage == null || clickedButton">
             Successivo  &gt;
           </button>
       </div>
@@ -156,5 +166,6 @@ import axios from 'axios';
   .buttons > button:disabled{
     opacity: .5;
     background-color: lightgrey;
+    cursor: default;
   }
 </style>
