@@ -69,7 +69,7 @@ import axios from 'axios';
       <div class="projects-container">
           <div v-for="project in projects" :key="project.id">
                 <h3>
-                  {{ project.name }}
+                 {{ project.id }} ) {{ project.name }}
                 </h3>
                 <h5 v-if="project.type != null">
                     {{ project.type.title }}
@@ -97,11 +97,11 @@ import axios from 'axios';
           </div>
       </div>
       <div class="buttons">
-          <button @click="getPrevPage()">
+          <button @click="getPrevPage()" :disabled="prevPage == null">
             &lt; Precedente 
           </button>
 
-          <button @click="getNextPage()">
+          <button @click="getNextPage()" :disabled="nextPage == null">
             Successivo  &gt;
           </button>
       </div>
