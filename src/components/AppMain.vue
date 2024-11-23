@@ -7,17 +7,19 @@ import axios from 'axios';
           projects: [],
           prevPage: null,
           nextPage: null,
-          clickedButton: false
+          clickedButton: false,
+          defaultUrl: 'http://127.0.0.1:8000/api/projects'
+
 
         };
     },
     mounted() {
-        this.getProjects();
+        this.getProjects(this.defaultUrl);
     },
     methods: {
-      getProjects() {
+      getProjects(url) {
         axios
-          .get('http://127.0.0.1:8000/api/projects')
+          .get(url)
           .then((res) => {
             console.log(res.data.projects);
 
@@ -28,45 +30,22 @@ import axios from 'axios';
             console.log(this.prevPage);
             this.nextPage = res.data.projects.next_page_url;
             console.log(this.nextPage);
+
+            this.clickedButton = false;
+
           });
       },
       getPrevPage() {
         this.clickedButton = true;
-        axios
-          .get(this.prevPage)
-          .then((res) => {
-            console.log(res.data.projects);
-
-            this.projects = res.data.projects.data;
-            console.log(this.projects);
-
-            this.prevPage = res.data.projects.prev_page_url;
-            console.log(this.prevPage);
-            this.nextPage = res.data.projects.next_page_url;
-            console.log(this.nextPage);
-
-            this.clickedButton = false;
-
-          });
+       
+        this.getProjects(this.prevPage);
+    
       },
       getNextPage() {
         this.clickedButton = true;
-        axios
-          .get(this.nextPage)
-          .then((res) => {
-            console.log(res.data.projects);
-
-            this.projects = res.data.projects.data;
-            console.log(this.projects);
-
-            this.prevPage = res.data.projects.prev_page_url;
-            console.log(this.prevPage);
-            this.nextPage = res.data.projects.next_page_url;
-            console.log(this.nextPage);
-
-            this.clickedButton = false;
-
-          });
+        
+        this.getProjects(this.nextPage);
+          
       }
     }
  }
